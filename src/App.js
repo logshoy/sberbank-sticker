@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import TodoCreate from './TodoCreate';
+import TodoList from './TodoList';
+import { connect } from 'react-redux';
+import { localstorageGet } from './store/actions/todos';
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    const todos = Array.from(
+      JSON.parse(window.localStorage.getItem('todoItem')),
+    );
+    props.localstorageGet(todos);
+    // eslint-disable-next-line
+  }, []); 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <TodoCreate />
+      <TodoList todos={props.todosArray} />
     </div>
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    todosArray: state.todos.todosArray,
+    todoTitle: state.todos.todoTitle,
+  };
+}
+
+function mapDispathToProps(dispatch) {
+  return {
+    localstorageGet: todos => dispatch(localstorageGet(todos)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(App);
