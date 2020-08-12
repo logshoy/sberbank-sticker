@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import TodoCreate from './TodoCreate';
 import TodoList from './TodoList';
+import DeletePostModal from './components/DeletePostModal.js';
 import { connect } from 'react-redux';
 import { localstorageGet } from './store/actions/todos';
 
@@ -17,6 +18,7 @@ function App(props) {
     <div className="container">
       <TodoCreate />
       <TodoList todos={props.todosArray} />
+      <DeletePostModal />
     </div>
   );
 }

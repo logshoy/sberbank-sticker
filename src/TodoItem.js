@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { removeTodoItem, checkItem } from './store/actions/todos';
+import { showModal } from './store/actions/modal';
 
 function TodoItem(props) {
   const cls = ['todo'];
@@ -19,7 +20,7 @@ function TodoItem(props) {
         <span>{props.title}</span>
         <i
           className="material-icons red-text"
-          onClick={props.removeTodoItem.bind(this, props.id)}
+          onClick={props.showModal.bind(this, props.id)}
         >
           delete
         </i>
@@ -32,6 +33,7 @@ function mapDispathToProps(dispatch) {
   return {
     removeTodoItem: id => dispatch(removeTodoItem(id)),
     checkItem: id => dispatch(checkItem(id)),
+    showModal: id => dispatch(showModal(id)),
   };
 }
 
