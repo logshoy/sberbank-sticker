@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTodoItem, inputTitleHandler } from './store/actions/todos';
 
 function TodoCreate(props) {
+  const [todos, addTodos] = useState(['']);
+
   const inputTitle = e => {
     const value = e.target.value;
     props.inputTitleHandler(value);
@@ -10,9 +12,28 @@ function TodoCreate(props) {
 
   const addTodo = event => {
     if (event.key === 'Enter') {
-      props.addTodoItem();
+      console.log(todos);
+      props.addTodoItem(todos);
       props.inputTitleHandler('');
+      addTodos(['']);
     }
+  };
+
+  const addTodoItem = () => {
+    addTodos([...todos, '']);
+  };
+
+  const handleChange = (e, index) => {
+    todos[index] = {
+      name: e.target.value,
+      completed: false,
+    };
+    addTodos([...todos]);
+  };
+
+  const handleRemove = index => {
+    todos.splice(index, 1);
+    addTodos([...todos]);
   };
 
   return (
@@ -27,16 +48,20 @@ function TodoCreate(props) {
           onKeyPress={addTodo}
         />
       </div>
-      <hr />
-      <div className="input-field">
-        <input
-          type="text"
-          placeholder="Task"
-          // value={props.todoTitle}
-          // onChange={inputTitle}
-          // onKeyPress={addTodo}
-        />
-      </div>
+      {todos.map((todo, index) => {
+        return (
+          <div className="input-createTodo" key={index}>
+            <input
+              type="text"
+              placeholder="Task"
+              onChange={e => handleChange(e, index)}
+              value={todo.name}
+            />
+            <button onClick={e => handleRemove(e)}>Remove</button>
+          </div>
+        );
+      })}
+      <button onClick={addTodoItem}>Add checkbox</button>
     </div>
   );
 }
@@ -50,7 +75,7 @@ function mapStateToProps(state) {
 function mapDispathToProps(dispatch) {
   return {
     inputTitleHandler: title => dispatch(inputTitleHandler(title)),
-    addTodoItem: () => dispatch(addTodoItem()),
+    addTodoItem: todosList => dispatch(addTodoItem(todosList)),
   };
 }
 

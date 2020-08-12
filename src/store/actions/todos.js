@@ -14,30 +14,32 @@ export function localstorageGet(localTodos) {
   };
 }
 
-export function addTodoItem() {
+export function addTodoItem(todosList) {
   return dispatch => {
-    dispatch(addTodoItems());
+    dispatch(addTodoItems(todosList));
     dispatch(localSet());
   };
 }
 
-function addTodoItems() {
+function addTodoItems(todosList) {
   return {
     type: ADD_TODO_ITEM,
+    todosList,
   };
 }
 
-export function checkItem(id) {
+export function checkItem(todoId, todoIndex) {
   return dispatch => {
-    dispatch(checkItems(id));
+    dispatch(checkItems(todoId, todoIndex));
     dispatch(localSet());
   };
 }
 
-function checkItems(id) {
+function checkItems(id, index) {
   return {
     type: CHECK_ITEM,
     id,
+    index,
   };
 }
 

@@ -5,8 +5,25 @@ body {
   padding: 0;
 }
 
-.todo {
-  margin-bottom: 1rem;
+.todoItem {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  background: #f3f3f3;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+
+.todo-header {
+  display: flex;
+  margin: 10px 15px;
+}
+
+.todoCheck {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
 }
 
 .create-todo {
@@ -14,22 +31,21 @@ body {
   padding: 15px;
 }
 
-.todo.completed span {
+.input-createTodo {
+  display: flex;
+}
+
+.todoCheck.completed span {
   text-decoration: line-through;
 }
 
 .todo label {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   cursor: pointer;
-  background: #f3f3f3;
-  padding: 1rem;
 }
 
 .todo i {
   z-index: 2;
+  cursor: pointer;
 }
 
 .modalDelete {

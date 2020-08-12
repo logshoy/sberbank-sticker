@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import TodoCreate from './TodoCreate';
 import TodoList from './TodoList';
 import DeletePostModal from './components/DeletePostModal.js';
+import EditPost from './components/EditPost';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { localstorageGet } from './store/actions/todos';
 
@@ -19,6 +21,7 @@ function App(props) {
       <TodoCreate />
       <TodoList todos={props.todosArray} />
       <DeletePostModal />
+      <Route path="/post" exact component={EditPost} />
     </div>
   );
 }

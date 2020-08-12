@@ -29,16 +29,22 @@ export default function todosReducer(state = initialState, action) {
       state.todosArray.push({
         id: Date.now(),
         title: state.todoTitle,
-        completed: false,
+        todosList: action.todosList,
       });
 
       return state;
     case CHECK_ITEM: {
+      console.log(action.id, action.index);
       return {
         ...state,
         todosArray: state.todosArray.map(item => {
           if (item.id === action.id) {
-            item.completed = !item.completed;
+            item.todosList.map((itemCheck, index) => {
+              if (index === action.index) {
+                itemCheck.completed = !itemCheck.completed;
+              }
+              return itemCheck;
+            });
           }
           return item;
         }),
