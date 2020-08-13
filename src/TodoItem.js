@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { removeTodoItem, checkItem } from './store/actions/todos';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { showModal } from './store/actions/modal';
 
 function TodoItem(props) {
@@ -11,7 +11,7 @@ function TodoItem(props) {
         <span>{props.title}</span>
         <div onClick={() => props.showModal(props.id)}>Удалить</div>
       </div>
-      <NavLink to="/post">Изменить</NavLink>
+      <Link to={'/todo/' + props.id}>Изменить</Link>
       {props.todosList.map((item, index) => {
         const cls = ['todoCheck'];
         if (item.completed) {
@@ -28,12 +28,6 @@ function TodoItem(props) {
               <span></span>
             </label>
             <span>{item.name}</span>
-            <i
-              className="material-icons red-text"
-              onClick={() => props.showModal(item.id)}
-            >
-              delete
-            </i>
           </li>
         );
       })}

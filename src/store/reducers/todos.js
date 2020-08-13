@@ -6,11 +6,13 @@ import {
   LOCALSTORAGE_GET,
   LOCALSTORAGE_SET,
   CHECK_ITEM,
+  TODO_BY_ID,
 } from '../actions/actionTypes';
 
 const initialState = {
   todosArray: [],
   todoTitle: '',
+  todo: '',
 };
 
 export default function todosReducer(state = initialState, action) {
@@ -19,6 +21,11 @@ export default function todosReducer(state = initialState, action) {
       return {
         ...state,
         todosArray: action.localTodos,
+      };
+    case TODO_BY_ID:
+      return {
+        ...state,
+        todo: state.todosArray,
       };
     case INPUT_TITLE_HANDLER:
       return {

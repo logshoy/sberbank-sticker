@@ -5,12 +5,20 @@ import {
   LOCALSTORAGE_GET,
   LOCALSTORAGE_SET,
   CHECK_ITEM,
+  TODO_BY_ID,
 } from './actionTypes';
 
 export function localstorageGet(localTodos) {
   return {
     type: LOCALSTORAGE_GET,
     localTodos,
+  };
+}
+
+export function todoById(id) {
+  return {
+    type: TODO_BY_ID,
+    id,
   };
 }
 

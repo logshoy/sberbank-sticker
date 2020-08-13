@@ -4,7 +4,7 @@ import TodoItem from './TodoItem';
 export default function TodoList({ todos }) {
   return (
     <ul>
-      {todos.map(item => (
+      {todos.reverse().map(item => (
         <TodoItem key={item.id} {...item} />
       ))}
     </ul>
