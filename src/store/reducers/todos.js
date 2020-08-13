@@ -1,7 +1,6 @@
 /* eslint-disable indent */
 import {
   ADD_TODO_ITEM,
-  INPUT_TITLE_HANDLER,
   REMOVE_TODO_ITEM,
   LOCALSTORAGE_GET,
   LOCALSTORAGE_SET,
@@ -11,7 +10,6 @@ import {
 
 const initialState = {
   todosArray: [],
-  todoTitle: '',
   todo: '',
 };
 
@@ -27,21 +25,15 @@ export default function todosReducer(state = initialState, action) {
         ...state,
         todo: state.todosArray,
       };
-    case INPUT_TITLE_HANDLER:
-      return {
-        ...state,
-        todoTitle: action.title,
-      };
     case ADD_TODO_ITEM:
+      // const newState = [...state];
       state.todosArray.push({
         id: Date.now(),
-        title: state.todoTitle,
+        title: action.todoTitle,
         todosList: action.todosList,
       });
-
       return state;
     case CHECK_ITEM: {
-      console.log(action.id, action.index);
       return {
         ...state,
         todosArray: state.todosArray.map(item => {
