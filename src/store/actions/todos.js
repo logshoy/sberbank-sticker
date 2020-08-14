@@ -1,10 +1,12 @@
 import {
+  INPUT_TITLE_HANDLER,
   ADD_TODO_ITEM,
   REMOVE_TODO_ITEM,
   LOCALSTORAGE_GET,
   LOCALSTORAGE_SET,
   CHECK_ITEM,
   TODO_BY_ID,
+  CHANGE_BY_ID,
 } from './actionTypes';
 
 export function localstorageGet(localTodos) {
@@ -14,24 +16,30 @@ export function localstorageGet(localTodos) {
   };
 }
 
-export function todoById(id) {
+export function inputTitleHandler(title) {
   return {
-    type: TODO_BY_ID,
-    id,
+    type: INPUT_TITLE_HANDLER,
+    title,
   };
 }
 
-export function addTodoItem(todoTitle, todosList) {
+export function todoById(byId) {
+  return {
+    type: TODO_BY_ID,
+    byId,
+  };
+}
+
+export function addTodoItem(todosList) {
   return dispatch => {
-    dispatch(addTodoItems(todoTitle, todosList));
+    dispatch(addTodoItems(todosList));
     dispatch(localSet());
   };
 }
 
-function addTodoItems(todoTitle, todosList) {
+function addTodoItems(todosList) {
   return {
     type: ADD_TODO_ITEM,
-    todoTitle,
     todosList,
   };
 }
@@ -62,6 +70,22 @@ function removeTodoItems(id) {
   return {
     type: REMOVE_TODO_ITEM,
     id,
+  };
+}
+
+export function changeById(id, title, todosList) {
+  return dispatch => {
+    dispatch(changeByIds(id, title, todosList));
+    dispatch(localSet());
+  };
+}
+
+function changeByIds(id, title, todosList) {
+  return {
+    type: CHANGE_BY_ID,
+    id,
+    title,
+    todosList,
   };
 }
 

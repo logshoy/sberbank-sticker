@@ -6,7 +6,7 @@ body {
 }
 
 .todoItem {
-  margin: 5px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   background: #f3f3f3;
@@ -14,9 +14,19 @@ body {
   border-radius: 5px;
 }
 
+.todoItem__change {
+  margin: 0 5px;
+}
+
+.todoItem__delete {
+  margin: 0 5px;
+  color: red;
+}
+
 .todo-header {
   display: flex;
   margin: 10px 15px;
+  font-size: 20px;;
 }
 
 .todoCheck {

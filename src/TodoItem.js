@@ -9,9 +9,17 @@ function TodoItem(props) {
     <li className="todoItem">
       <div className="todo-header">
         <span>{props.title}</span>
-        <div onClick={() => props.showModal(props.id)}>Удалить</div>
+        <Link className="todoItem__change" to={'/todo/' + props.id}>
+          Изменить
+        </Link>
+        <div
+          className="todoItem__delete"
+          onClick={() => props.showModal(props.id)}
+        >
+          Удалить
+        </div>
       </div>
-      <Link to={'/todo/' + props.id}>Изменить</Link>
+
       {props.todosList.map((item, index) => {
         const cls = ['todoCheck'];
         if (item.completed) {
