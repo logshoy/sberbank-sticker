@@ -31,7 +31,13 @@ class EditPost extends React.Component {
 
   addTodoItem = () => {
     this.setState({
-      arr: [...this.state.arr, ''],
+      arr: [
+        ...this.state.arr,
+        {
+          name: '',
+          completed: false,
+        },
+      ],
     });
   };
 

@@ -1,9 +1,10 @@
 import { SHOW_MODAL, HIDE_MODAL } from './actionTypes';
 
-export function showModal(id) {
+export function showModal(modalType, modalProps) {
   return {
     type: SHOW_MODAL,
-    id,
+    modalType,
+    modalProps,
   };
 }
 

@@ -57,7 +57,7 @@ body {
   cursor: pointer;
 }
 
-.modalDelete {
+.modalBackground {
   position: fixed;
   z-index: 100;
   padding-top: 100px;

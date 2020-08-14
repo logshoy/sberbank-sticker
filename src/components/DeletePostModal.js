@@ -4,17 +4,13 @@ import { removeTodoItem } from '../store/actions/todos';
 import { hideModal } from '../store/actions/modal';
 
 function DeletePostModal(props) {
-  if (!props.modal.modalShow) {
-    return null;
-  }
-
   const removeTodo = () => {
-    props.removeTodoItem(props.modal.todoId);
+    props.removeTodoItem(props.modalProps);
     props.hideModal();
   };
 
   return (
-    <div className="modalDelete">
+    <div className="modalBackground">
       <div className="modal-content">
         <h2>Вы действительно хотите удалить эту заметку?</h2>
         <button onClick={removeTodo}>Yes</button>
@@ -24,12 +20,6 @@ function DeletePostModal(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    modal: state.modal,
-  };
-}
-
 function mapDispathToProps(dispatch) {
   return {
     removeTodoItem: id => dispatch(removeTodoItem(id)),
@@ -37,4 +27,4 @@ function mapDispathToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispathToProps)(DeletePostModal);
+export default connect(null, mapDispathToProps)(DeletePostModal);

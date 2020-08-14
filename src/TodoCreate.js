@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTodoItem, inputTitleHandler } from './store/actions/todos';
+import { addTodoItem } from './store/actions/todos';
+import { hideModal } from './store/actions/modal';
 
 function TodoCreate(props) {
+  const [todosTitle, setTodosTitle] = useState(['']);
   const [todos, addTodos] = useState(['']);
-
-  const inputTitle = e => {
-    const value = e.target.value;
-    props.inputTitleHandler(value);
-  };
 
   const addTodo = event => {
     if (event.key === 'Enter') {
-      props.addTodoItem(todos);
+      props.addTodoItem(todosTitle, todos);
       addTodos([]);
-      props.inputTitleHandler('');
+      hideModal();
     }
   };
 
@@ -42,8 +39,8 @@ function TodoCreate(props) {
         <input
           type="text"
           placeholder="Title"
-          value={props.todoTitle}
-          onChange={inputTitle}
+          value={todosTitle}
+          onChange={event => setTodosTitle(event.target.value)}
           onKeyPress={addTodo}
         />
       </div>
@@ -61,6 +58,7 @@ function TodoCreate(props) {
         );
       })}
       <button onClick={addTodoItem}>Add checkbox</button>
+      <button onClick={props.hideModal}>TodoCreate</button>
     </div>
   );
 }
@@ -73,8 +71,10 @@ function mapStateToProps(state) {
 
 function mapDispathToProps(dispatch) {
   return {
-    inputTitleHandler: title => dispatch(inputTitleHandler(title)),
-    addTodoItem: todosList => dispatch(addTodoItem(todosList)),
+    addTodoItem: (todosTitle, todosList) => {
+      dispatch(addTodoItem(todosTitle, todosList));
+    },
+    hideModal: () => dispatch(hideModal()),
   };
 }
 

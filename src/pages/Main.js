@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import TodoCreate from '../TodoCreate';
 import TodoList from '../TodoList';
-import DeletePostModal from '../components/DeletePostModal.js';
+import ModalRoot from '../components/ModalRoot';
 import { connect } from 'react-redux';
 import { localstorageGet } from '../store/actions/todos';
+import { showModal } from '../store/actions/modal';
 
 function Main(props) {
   useEffect(() => {
@@ -16,9 +16,11 @@ function Main(props) {
 
   return (
     <div className="container">
-      <TodoCreate />
+      <button onClick={() => props.showModal('SHOW_CREATE_TODO')}>
+        Создать список
+      </button>
       <TodoList todos={props.todosArray} />
-      <DeletePostModal />
+      <ModalRoot />
     </div>
   );
 }
@@ -33,6 +35,9 @@ function mapStateToProps(state) {
 function mapDispathToProps(dispatch) {
   return {
     localstorageGet: todos => dispatch(localstorageGet(todos)),
+    showModal: (modalType, modalProps) => {
+      dispatch(showModal(modalType, modalProps));
+    },
   };
 }
 export default connect(mapStateToProps, mapDispathToProps)(Main);

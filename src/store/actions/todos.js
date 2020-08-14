@@ -1,5 +1,4 @@
 import {
-  INPUT_TITLE_HANDLER,
   ADD_TODO_ITEM,
   REMOVE_TODO_ITEM,
   LOCALSTORAGE_GET,
@@ -16,13 +15,6 @@ export function localstorageGet(localTodos) {
   };
 }
 
-export function inputTitleHandler(title) {
-  return {
-    type: INPUT_TITLE_HANDLER,
-    title,
-  };
-}
-
 export function todoById(byId) {
   return {
     type: TODO_BY_ID,
@@ -30,16 +22,17 @@ export function todoById(byId) {
   };
 }
 
-export function addTodoItem(todosList) {
+export function addTodoItem(todosTitle, todosList) {
   return dispatch => {
-    dispatch(addTodoItems(todosList));
+    dispatch(addTodoItems(todosTitle, todosList));
     dispatch(localSet());
   };
 }
 
-function addTodoItems(todosList) {
+function addTodoItems(todosTitle, todosList) {
   return {
     type: ADD_TODO_ITEM,
+    todosTitle,
     todosList,
   };
 }

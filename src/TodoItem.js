@@ -14,7 +14,7 @@ function TodoItem(props) {
         </Link>
         <div
           className="todoItem__delete"
-          onClick={() => props.showModal(props.id)}
+          onClick={() => props.showModal('DELETE_POST', props.id)}
         >
           Удалить
         </div>
@@ -53,7 +53,9 @@ function mapDispathToProps(dispatch) {
   return {
     removeTodoItem: id => dispatch(removeTodoItem(id)),
     checkItem: (todoId, todoIndex) => dispatch(checkItem(todoId, todoIndex)),
-    showModal: id => dispatch(showModal(id)),
+    showModal: (modalType, modalProps) => {
+      dispatch(showModal(modalType, modalProps));
+    },
   };
 }
 

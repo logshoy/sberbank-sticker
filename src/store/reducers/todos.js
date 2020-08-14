@@ -1,6 +1,5 @@
 /* eslint-disable indent */
 import {
-  INPUT_TITLE_HANDLER,
   ADD_TODO_ITEM,
   REMOVE_TODO_ITEM,
   LOCALSTORAGE_GET,
@@ -12,7 +11,6 @@ import {
 
 const initialState = {
   todosArray: [],
-  todoTitle: '',
   todo: {},
 };
 
@@ -30,18 +28,18 @@ export default function todosReducer(state = initialState, action) {
           element => element.id === Number(action.byId),
         )[0],
       };
-    case INPUT_TITLE_HANDLER:
+    case ADD_TODO_ITEM:
       return {
         ...state,
-        todoTitle: action.title,
+        todosArray: [
+          ...state.todosArray,
+          {
+            id: Date.now(),
+            title: action.todosTitle,
+            todosList: action.todosList,
+          },
+        ],
       };
-    case ADD_TODO_ITEM:
-      state.todosArray.push({
-        id: Date.now(),
-        title: state.todoTitle,
-        todosList: action.todosList,
-      });
-      return state;
     case CHECK_ITEM: {
       return {
         ...state,
