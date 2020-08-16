@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6c534145f779d168e1cb86e8d8074023",
+    "revision": "0461e572650fc54da5f31ae6a87ff7c3",
     "url": "/sberbank-sticker/index.html"
   },
   {
