@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0461e572650fc54da5f31ae6a87ff7c3",
+    "revision": "b31330dae0812f731eee8a0e31583599",
     "url": "/sberbank-sticker/index.html"
   },
   {
-    "revision": "e991dea71e400aa1b2ba",
+    "revision": "c7438461327607d79d2b",
     "url": "/sberbank-sticker/static/css/main.69a48f85.chunk.css"
   },
   {
-    "revision": "a818e9611491e751805c",
-    "url": "/sberbank-sticker/static/js/2.edc72b54.chunk.js"
+    "revision": "b133e6078d89d7f02e93",
+    "url": "/sberbank-sticker/static/js/2.0f9abbd2.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/sberbank-sticker/static/js/2.edc72b54.chunk.js.LICENSE.txt"
+    "url": "/sberbank-sticker/static/js/2.0f9abbd2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e991dea71e400aa1b2ba",
-    "url": "/sberbank-sticker/static/js/main.f318a21d.chunk.js"
+    "revision": "c7438461327607d79d2b",
+    "url": "/sberbank-sticker/static/js/main.35a168a6.chunk.js"
   },
   {
     "revision": "21aeef8f99d783e99395",
