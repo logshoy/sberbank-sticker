@@ -6,11 +6,12 @@ import {
   LOCALSTORAGE_SET,
   CHECK_ITEM,
   TODO_BY_ID,
+  CHANGE_BY_ID,
 } from '../actions/actionTypes';
 
 const initialState = {
   todosArray: [],
-  todo: '',
+  todo: {},
 };
 
 export default function todosReducer(state = initialState, action) {
@@ -23,16 +24,22 @@ export default function todosReducer(state = initialState, action) {
     case TODO_BY_ID:
       return {
         ...state,
-        todo: state.todosArray,
+        todo: state.todosArray.filter(
+          element => element.id === Number(action.byId),
+        )[0],
       };
     case ADD_TODO_ITEM:
-      // const newState = [...state];
-      state.todosArray.push({
-        id: Date.now(),
-        title: action.todoTitle,
-        todosList: action.todosList,
-      });
-      return state;
+      return {
+        ...state,
+        todosArray: [
+          ...state.todosArray,
+          {
+            id: Date.now(),
+            title: action.todosTitle,
+            todosList: action.todosList,
+          },
+        ],
+      };
     case CHECK_ITEM: {
       return {
         ...state,
@@ -55,6 +62,18 @@ export default function todosReducer(state = initialState, action) {
         todosArray: state.todosArray.filter(
           element => element.id !== action.id,
         ),
+      };
+    case CHANGE_BY_ID:
+      console.log(action.todosList);
+      return {
+        ...state,
+        todosArray: state.todosArray.map(element => {
+          if (element.id === Number(action.id)) {
+            element.title = action.title;
+            element.todosList = action.todosList;
+          }
+          return element;
+        }),
       };
     case LOCALSTORAGE_SET:
       window.localStorage.setItem('todoItem', JSON.stringify(state.todosArray));

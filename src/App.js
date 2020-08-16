@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
 import Main from './pages/Main';
 import EditPost from './pages/EditPost';
+import Modal from './components/Modal';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { localstorageGet } from './store/actions/todos';
 
 function App(props) {
   useEffect(() => {
-    const todos = Array.from(
-      JSON.parse(window.localStorage.getItem('todoItem')),
-    );
-    props.localstorageGet(todos);
+    if (window.localStorage.getItem('todoItem') !== null) {
+      const todos = Array.from(
+        JSON.parse(window.localStorage.getItem('todoItem')),
+      );
+      props.localstorageGet(todos);
+    }
     // eslint-disable-next-line
   }, []); 
 
@@ -18,6 +21,7 @@ function App(props) {
     <>
       <Route path="/" exact component={Main} />
       <Route path="/todo/:id" exact component={EditPost} />
+      {props.modalData.modalType ? <Modal /> : null}
     </>
   );
 }
@@ -25,6 +29,7 @@ function App(props) {
 function mapStateToProps(state) {
   return {
     todosArray: state.todos.todosArray,
+    modalData: state.modal,
   };
 }
 

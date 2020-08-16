@@ -3,16 +3,16 @@
 import { SHOW_MODAL, HIDE_MODAL } from '../actions/actionTypes';
 
 const initialState = {
-  modalShow: false,
-  todoId: '',
+  modalType: null,
+  modalProps: {},
 };
 
 export default function modal(state = initialState, action) {
   switch (action.type) {
     case SHOW_MODAL:
       return {
-        modalShow: true,
-        todoId: action.id,
+        modalType: action.modalType,
+        modalProps: action.modalProps,
       };
     case HIDE_MODAL:
       return initialState;

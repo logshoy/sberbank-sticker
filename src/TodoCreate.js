@@ -1,28 +1,42 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTodoItem } from './store/actions/todos';
+import { hideModal } from './store/actions/modal';
 
 function TodoCreate(props) {
-  const [todoTitle, setTodoTitle] = useState('');
-  const [todos, addTodos] = useState([]);
+  const [todosTitle, setTodosTitle] = useState(['']);
+  const [todos, addTodos] = useState([
+    {
+      name: '',
+      completed: false,
+    },
+  ]);
 
   const addTodo = event => {
     if (event.key === 'Enter') {
-      props.addTodoItem(todoTitle, todos);
-      setTodoTitle('');
+      props.addTodoItem(todosTitle, todos);
       addTodos([]);
+      props.hideModal();
     }
   };
 
-  const addTodoItem = () => {
-    addTodos([...todos, '']);
+  const addCheckboxItem = () => {
+    addTodos([
+      ...todos,
+      {
+        name: '',
+        completed: false,
+      },
+    ]);
   };
 
   const handleChange = (e, index) => {
-    todos[index] = {
-      name: e.target.value,
-      completed: false,
-    };
+    todos[index].name = e.target.value;
+    addTodos([...todos]);
+  };
+
+  const checkItem = (completed, index) => {
+    todos[index].completed = !completed;
     addTodos([...todos]);
   };
 
@@ -31,41 +45,79 @@ function TodoCreate(props) {
     addTodos([...todos]);
   };
 
+  const addTodoItem = () => {
+    props.addTodoItem(todosTitle, todos);
+    addTodos([]);
+    props.hideModal();
+  };
+
   return (
     <div className="create-todo">
-      <h1>Todo app</h1>
-      <div className="input-field">
+      <h1>Создать заметку</h1>
+      <div>
         <input
           type="text"
           placeholder="Title"
-          value={todoTitle}
-          onChange={event => setTodoTitle(event.target.value)}
+          value={todosTitle}
+          onChange={event => setTodosTitle(event.target.value)}
           onKeyPress={addTodo}
         />
       </div>
       {todos.map((todo, index) => {
+        const cls = ['todoCheck'];
+        if (todo.completed) {
+          cls.push('completed');
+        }
         return (
-          <div className="input-createTodo" key={index}>
+          <div className={cls.join(' ')} key={index}>
+            <label>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => checkItem(todo.completed, index)}
+              />
+              <div></div>
+            </label>
             <input
               type="text"
               placeholder="Task"
               onChange={e => handleChange(e, index)}
               value={todo.name}
             />
-            <button onClick={e => handleRemove(e)}>Remove</button>
+            <button className="button--delete" onClick={e => handleRemove(e)}>
+              &times;
+            </button>
           </div>
         );
       })}
-      <button onClick={addTodoItem}>Add checkbox</button>
+      <button className="button" onClick={addCheckboxItem}>
+        Добавить чекбокс
+      </button>
+      <div className="buttons">
+        <button className="button" onClick={addTodoItem}>
+          Сохранить
+        </button>
+        <button className="button" onClick={props.hideModal}>
+          Закрыть
+        </button>
+      </div>
     </div>
   );
 }
 
-function mapDispathToProps(dispatch) {
+function mapStateToProps(state) {
   return {
-    addTodoItem: (todoTitle, todosList) =>
-      dispatch(addTodoItem(todoTitle, todosList)),
+    todoTitle: state.todos.todoTitle,
   };
 }
 
-export default connect(null, mapDispathToProps)(TodoCreate);
+function mapDispathToProps(dispatch) {
+  return {
+    addTodoItem: (todosTitle, todosList) => {
+      dispatch(addTodoItem(todosTitle, todosList));
+    },
+    hideModal: () => dispatch(hideModal()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(TodoCreate);

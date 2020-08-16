@@ -5,6 +5,7 @@ import {
   LOCALSTORAGE_SET,
   CHECK_ITEM,
   TODO_BY_ID,
+  CHANGE_BY_ID,
 } from './actionTypes';
 
 export function localstorageGet(localTodos) {
@@ -14,24 +15,24 @@ export function localstorageGet(localTodos) {
   };
 }
 
-export function todoById(id) {
+export function todoById(byId) {
   return {
     type: TODO_BY_ID,
-    id,
+    byId,
   };
 }
 
-export function addTodoItem(todoTitle, todosList) {
+export function addTodoItem(todosTitle, todosList) {
   return dispatch => {
-    dispatch(addTodoItems(todoTitle, todosList));
+    dispatch(addTodoItems(todosTitle, todosList));
     dispatch(localSet());
   };
 }
 
-function addTodoItems(todoTitle, todosList) {
+function addTodoItems(todosTitle, todosList) {
   return {
     type: ADD_TODO_ITEM,
-    todoTitle,
+    todosTitle,
     todosList,
   };
 }
@@ -62,6 +63,22 @@ function removeTodoItems(id) {
   return {
     type: REMOVE_TODO_ITEM,
     id,
+  };
+}
+
+export function changeById(id, title, todosList) {
+  return dispatch => {
+    dispatch(changeByIds(id, title, todosList));
+    dispatch(localSet());
+  };
+}
+
+function changeByIds(id, title, todosList) {
+  return {
+    type: CHANGE_BY_ID,
+    id,
+    title,
+    todosList,
   };
 }
 

@@ -7,28 +7,38 @@ import { showModal } from './store/actions/modal';
 function TodoItem(props) {
   return (
     <li className="todoItem">
-      <div className="todo-header">
-        <span>{props.title}</span>
-        <div onClick={() => props.showModal(props.id)}>Удалить</div>
+      <div className="todoItem__todoHeader">
+        <div className="todoItem__title">{props.title}</div>
+        <div className="todoItem__buttons">
+          <Link className="todoItem__change" to={'/todo/' + props.id}>
+            Изменить
+          </Link>
+          <div
+            className="todoItem__delete"
+            onClick={() => props.showModal('DELETE_POST', props.id)}
+          >
+            Удалить
+          </div>
+        </div>
       </div>
-      <Link to={'/todo/' + props.id}>Изменить</Link>
+      <hr></hr>
       {props.todosList.map((item, index) => {
         const cls = ['todoCheck'];
         if (item.completed) {
           cls.push('completed');
         }
         return (
-          <li key={index} className={cls.join(' ')}>
+          <div key={index} className={cls.join(' ')}>
             <label>
               <input
                 type="checkbox"
                 checked={item.completed}
                 onChange={() => props.checkItem(props.id, index)}
               />
-              <span></span>
+              <div></div>
             </label>
             <span>{item.name}</span>
-          </li>
+          </div>
         );
       })}
     </li>
@@ -45,7 +55,9 @@ function mapDispathToProps(dispatch) {
   return {
     removeTodoItem: id => dispatch(removeTodoItem(id)),
     checkItem: (todoId, todoIndex) => dispatch(checkItem(todoId, todoIndex)),
-    showModal: id => dispatch(showModal(id)),
+    showModal: (modalType, modalProps) => {
+      dispatch(showModal(modalType, modalProps));
+    },
   };
 }
 
