@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import DeletePostModal from './DeletePostModal';
 import TodoCreate from '../TodoCreate';
 import ChangeTodoModal from './ChangeTodoModal';
@@ -8,29 +8,34 @@ import { hideModal } from '../store/actions/modal';
 const Modal = props => {
   const modal = useRef(null);
 
-  const handleKeyUp = e => {
-    const keys = {
-      27: () => {
-        e.preventDefault();
-        props.hideModal();
-        window.removeEventListener('keyup', handleKeyUp, false);
-      },
-    };
+  const handleKeyUp = useCallback(
+    e => {
+      const keys = {
+        27: () => {
+          e.preventDefault();
+          props.hideModal();
+          window.removeEventListener('keyup', handleKeyUp, false);
+        },
+      };
 
-    if (keys[e.keyCode]) {
-      keys[e.keyCode]();
-    }
-  };
-
-
-  const handleOutsideClick = e => {
-    if (modal) {
-      if (!modal.current.contains(e.target)) {
-      props.hideModal();
-      document.removeEventListener('click', handleOutsideClick, false);
+      if (keys[e.keyCode]) {
+        keys[e.keyCode]();
       }
-    }
-  };
+    },
+    [props],
+  );
+
+  const handleOutsideClick = useCallback(
+    e => {
+      if (modal) {
+        if (!modal.current.contains(e.target)) {
+          props.hideModal();
+          document.removeEventListener('click', handleOutsideClick, false);
+        }
+      }
+    },
+    [props],
+  );
 
   useEffect(() => {
     window.addEventListener('keyup', handleKeyUp, false);
@@ -53,16 +58,16 @@ const Modal = props => {
   };
 
   return (
-        <div className="modalBackground">
-          <div className="modal-content" ref={modal}>
-            <button
-              type="button"
-              className="closeButton"
-              onClick={props.hideModal}
-            />
-            {renderTypeModal()}
-          </div>
-        </div>
+    <div className="modalBackground">
+      <div className="modal-content" ref={modal}>
+        <button
+          type="button"
+          className="closeButton"
+          onClick={props.hideModal}
+        />
+        {renderTypeModal()}
+      </div>
+    </div>
   );
 };
 

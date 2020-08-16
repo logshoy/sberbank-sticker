@@ -1,22 +1,35 @@
 import React from 'react';
 import TodoList from '../TodoList';
-import ModalRoot from '../components/ModalRoot';
-// import SimpleModal from '../components/SimpleModal';
-import Modal from '../components/Modal';
 import { connect } from 'react-redux';
 import { localstorageGet } from '../store/actions/todos';
 import { showModal } from '../store/actions/modal';
 
 function Main(props) {
+  const newArray = [...props.todosArray];
+
   return (
     <div className="container">
-      <button onClick={() => props.showModal('SHOW_CREATE_TODO')}>
-        Создать список
+      <h1>Заметки Тестовое задание для Сбербанка</h1>
+      <button
+        className="button"
+        onClick={() => props.showModal('SHOW_CREATE_TODO')}
+      >
+        Создать заметку
       </button>
-      <TodoList todos={props.todosArray} />
-      <ModalRoot />
-      {/* <SimpleModal /> */}
-      {props.modalData.modalType ? <Modal /> : null}
+      <h2>Список задач:</h2>
+      {newArray.length ? (
+        <TodoList todos={newArray.reverse()} />
+      ) : (
+        <div className="zeroTodo">
+          <h1>У вас нет еще ни одной заметки</h1>
+          <button
+            className="button"
+            onClick={() => props.showModal('SHOW_CREATE_TODO')}
+          >
+            Создать заметку
+          </button>
+        </div>
+      )}
     </div>
   );
 }

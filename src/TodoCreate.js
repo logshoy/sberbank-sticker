@@ -54,7 +54,7 @@ function TodoCreate(props) {
   return (
     <div className="create-todo">
       <h1>Создать заметку</h1>
-      <div className="input-field">
+      <div>
         <input
           type="text"
           placeholder="Title"
@@ -76,7 +76,7 @@ function TodoCreate(props) {
                 checked={todo.completed}
                 onChange={() => checkItem(todo.completed, index)}
               />
-              <span></span>
+              <div></div>
             </label>
             <input
               type="text"
@@ -84,11 +84,15 @@ function TodoCreate(props) {
               onChange={e => handleChange(e, index)}
               value={todo.name}
             />
-            <button onClick={e => handleRemove(e)}>Remove</button>
+            <button className="button--delete" onClick={e => handleRemove(e)}>
+              &times;
+            </button>
           </div>
         );
       })}
-      <button onClick={addCheckboxItem}>Добавить чекбокс</button>
+      <button className="button" onClick={addCheckboxItem}>
+        Добавить чекбокс
+      </button>
       <div className="buttons">
         <button className="button" onClick={addTodoItem}>
           Сохранить

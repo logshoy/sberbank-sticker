@@ -96,7 +96,7 @@ class EditPost extends React.Component {
                   checked={todo.completed}
                   onChange={() => this.checkItem(todo.completed, index)}
                 />
-                <span></span>
+                <div></div>
               </label>
               <input
                 type="text"

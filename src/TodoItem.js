@@ -8,8 +8,8 @@ function TodoItem(props) {
   return (
     <li className="todoItem">
       <div className="todoItem__todoHeader">
-        <span>{props.title}</span>
-        <div className="todoItem__todoHeader">
+        <div className="todoItem__title">{props.title}</div>
+        <div className="todoItem__buttons">
           <Link className="todoItem__change" to={'/todo/' + props.id}>
             Изменить
           </Link>
@@ -21,7 +21,7 @@ function TodoItem(props) {
           </div>
         </div>
       </div>
-
+      <hr></hr>
       {props.todosList.map((item, index) => {
         const cls = ['todoCheck'];
         if (item.completed) {
@@ -35,7 +35,7 @@ function TodoItem(props) {
                 checked={item.completed}
                 onChange={() => props.checkItem(props.id, index)}
               />
-              <span></span>
+              <div></div>
             </label>
             <span>{item.name}</span>
           </div>

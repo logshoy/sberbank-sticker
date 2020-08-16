@@ -18,12 +18,11 @@ function ChangeTodoModal(props) {
   };
 
   return (
-    <div className="modalBackground">
-      <div className="modal-content">
-        <h2>Вы действительно хотите изменить эту заметку?</h2>
-        <button onClick={changeByIdModal}>Yes</button>
-        <button onClick={props.hideModal}>Nope</button>
-      </div>
+    <div>
+      <h2>Вы действительно хотите изменить эту заметку?</h2>
+      <div></div>
+      <button onClick={changeByIdModal}>Yes</button>
+      <button onClick={props.hideModal}>Nope</button>
     </div>
   );
 }
