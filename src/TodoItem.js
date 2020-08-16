@@ -7,16 +7,18 @@ import { showModal } from './store/actions/modal';
 function TodoItem(props) {
   return (
     <li className="todoItem">
-      <div className="todo-header">
+      <div className="todoItem__todoHeader">
         <span>{props.title}</span>
-        <Link className="todoItem__change" to={'/todo/' + props.id}>
-          Изменить
-        </Link>
-        <div
-          className="todoItem__delete"
-          onClick={() => props.showModal('DELETE_POST', props.id)}
-        >
-          Удалить
+        <div className="todoItem__todoHeader">
+          <Link className="todoItem__change" to={'/todo/' + props.id}>
+            Изменить
+          </Link>
+          <div
+            className="todoItem__delete"
+            onClick={() => props.showModal('DELETE_POST', props.id)}
+          >
+            Удалить
+          </div>
         </div>
       </div>
 
@@ -26,7 +28,7 @@ function TodoItem(props) {
           cls.push('completed');
         }
         return (
-          <li key={index} className={cls.join(' ')}>
+          <div key={index} className={cls.join(' ')}>
             <label>
               <input
                 type="checkbox"
@@ -36,7 +38,7 @@ function TodoItem(props) {
               <span></span>
             </label>
             <span>{item.name}</span>
-          </li>
+          </div>
         );
       })}
     </li>

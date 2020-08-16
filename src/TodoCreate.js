@@ -5,25 +5,38 @@ import { hideModal } from './store/actions/modal';
 
 function TodoCreate(props) {
   const [todosTitle, setTodosTitle] = useState(['']);
-  const [todos, addTodos] = useState(['']);
+  const [todos, addTodos] = useState([
+    {
+      name: '',
+      completed: false,
+    },
+  ]);
 
   const addTodo = event => {
     if (event.key === 'Enter') {
       props.addTodoItem(todosTitle, todos);
       addTodos([]);
-      hideModal();
+      props.hideModal();
     }
   };
 
-  const addTodoItem = () => {
-    addTodos([...todos, '']);
+  const addCheckboxItem = () => {
+    addTodos([
+      ...todos,
+      {
+        name: '',
+        completed: false,
+      },
+    ]);
   };
 
   const handleChange = (e, index) => {
-    todos[index] = {
-      name: e.target.value,
-      completed: false,
-    };
+    todos[index].name = e.target.value;
+    addTodos([...todos]);
+  };
+
+  const checkItem = (completed, index) => {
+    todos[index].completed = !completed;
     addTodos([...todos]);
   };
 
@@ -32,9 +45,15 @@ function TodoCreate(props) {
     addTodos([...todos]);
   };
 
+  const addTodoItem = () => {
+    props.addTodoItem(todosTitle, todos);
+    addTodos([]);
+    props.hideModal();
+  };
+
   return (
     <div className="create-todo">
-      <h1>Todo app</h1>
+      <h1>Создать заметку</h1>
       <div className="input-field">
         <input
           type="text"
@@ -45,8 +64,20 @@ function TodoCreate(props) {
         />
       </div>
       {todos.map((todo, index) => {
+        const cls = ['todoCheck'];
+        if (todo.completed) {
+          cls.push('completed');
+        }
         return (
-          <div className="input-createTodo" key={index}>
+          <div className={cls.join(' ')} key={index}>
+            <label>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={() => checkItem(todo.completed, index)}
+              />
+              <span></span>
+            </label>
             <input
               type="text"
               placeholder="Task"
@@ -57,8 +88,15 @@ function TodoCreate(props) {
           </div>
         );
       })}
-      <button onClick={addTodoItem}>Add checkbox</button>
-      <button onClick={props.hideModal}>TodoCreate</button>
+      <button onClick={addCheckboxItem}>Добавить чекбокс</button>
+      <div className="buttons">
+        <button className="button" onClick={addTodoItem}>
+          Сохранить
+        </button>
+        <button className="button" onClick={props.hideModal}>
+          Закрыть
+        </button>
+      </div>
     </div>
   );
 }

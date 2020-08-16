@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import TodoList from '../TodoList';
 import ModalRoot from '../components/ModalRoot';
+// import SimpleModal from '../components/SimpleModal';
+import Modal from '../components/Modal';
 import { connect } from 'react-redux';
 import { localstorageGet } from '../store/actions/todos';
 import { showModal } from '../store/actions/modal';
 
 function Main(props) {
-  useEffect(() => {
-    const todos = Array.from(
-      JSON.parse(window.localStorage.getItem('todoItem')),
-    );
-    props.localstorageGet(todos);
-    // eslint-disable-next-line
-  }, []); 
-
   return (
     <div className="container">
       <button onClick={() => props.showModal('SHOW_CREATE_TODO')}>
@@ -21,6 +15,8 @@ function Main(props) {
       </button>
       <TodoList todos={props.todosArray} />
       <ModalRoot />
+      {/* <SimpleModal /> */}
+      {props.modalData.modalType ? <Modal /> : null}
     </div>
   );
 }
@@ -29,6 +25,7 @@ function mapStateToProps(state) {
   return {
     todosArray: state.todos.todosArray,
     todoTitle: state.todos.todoTitle,
+    modalData: state.modal,
   };
 }
 

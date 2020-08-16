@@ -1,4 +1,5 @@
 import React from 'react';
+import ModalRoot from '../components/ModalRoot';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { todoById, changeById } from '../store/actions/todos';
@@ -13,7 +14,7 @@ class EditPost extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     setTimeout(() => {
       this.props.todoById(this.props.match.params.id);
       this.setState({
@@ -42,12 +43,10 @@ class EditPost extends React.Component {
   };
 
   handleChange = (e, index) => {
-    this.state.arr[index] = {
-      name: e.target.value,
-      completed: false,
-    };
+    const newState = this.state.arr;
+    newState[index].name = e.target.value;
     this.setState({
-      arr: this.state.arr,
+      arr: newState,
     });
   };
 
@@ -58,12 +57,21 @@ class EditPost extends React.Component {
     });
   };
 
+  checkItem = (completed, index) => {
+    const newState = this.state.arr;
+    newState[index].completed = !completed;
+    this.setState({
+      arr: newState,
+    });
+  };
+
   handleSave() {
     this.props.changeById(
       this.props.todoId.id,
       this.state.todoTitle,
       this.state.arr,
     );
+    this.props.history.push('/');
   }
 
   render() {
@@ -75,26 +83,49 @@ class EditPost extends React.Component {
           value={this.state.todoTitle}
           onChange={e => this.handleChangeTitle(e)}
         />
-        {this.state.arr.map((todo, index) => (
-          <div className="input-createTodo" key={index}>
-            <input
-              type="text"
-              placeholder="Task"
-              onChange={e => this.handleChange(e, index)}
-              value={todo.name}
-            />
-            <button onClick={() => this.handleRemove(index)}>Remove</button>
-          </div>
-        ))}
+        {this.state.arr.map((todo, index) => {
+          const cls = ['todoCheck'];
+          if (todo.completed) {
+            cls.push('completed');
+          }
+          return (
+            <div className={cls.join(' ')} key={index}>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => this.checkItem(todo.completed, index)}
+                />
+                <span></span>
+              </label>
+              <input
+                type="text"
+                placeholder="Task"
+                onChange={e => this.handleChange(e, index)}
+                value={todo.name}
+              />
+              <button onClick={() => this.handleRemove(index)}>Remove</button>
+            </div>
+          );
+        })}
         <button onClick={this.addTodoItem}>Add checkbox</button>
-        <button
-          onClick={() => {
-            this.handleSave();
-          }}
-        >
-          {' '}
-          Сохранить{' '}
-        </button>
+        <div>
+          <button
+            onClick={() => {
+              this.props.showModal('CHANGE_TODO', {
+                id: this.props.todoId.id,
+                title: this.state.todoTitle,
+                todosList: this.state.arr,
+              });
+            }}
+          >
+            Сохранить
+          </button>
+          <Link to="/">
+            <button>Отмена</button>
+          </Link>
+        </div>
+        <ModalRoot />
       </div>
     );
   }
@@ -112,7 +143,9 @@ function mapDispathToProps(dispatch) {
     changeById: (id, title, todosList) => {
       dispatch(changeById(id, title, todosList));
     },
-    showModal: id => dispatch(showModal(id)),
+    showModal: (modalType, modalProps) => {
+      dispatch(showModal(modalType, modalProps));
+    },
   };
 }
 

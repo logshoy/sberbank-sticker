@@ -10,11 +10,15 @@ function DeletePostModal(props) {
   };
 
   return (
-    <div className="modalBackground">
-      <div className="modal-content">
-        <h2>Вы действительно хотите удалить эту заметку?</h2>
-        <button onClick={removeTodo}>Yes</button>
-        <button onClick={props.hideModal}>Nope</button>
+    <div>
+      <h2>Вы действительно хотите удалить эту заметку?</h2>
+      <div className="buttons">
+        <button className="button" onClick={removeTodo}>
+          Да
+        </button>
+        <button className="button" onClick={props.hideModal}>
+          Нет
+        </button>
       </div>
     </div>
   );
