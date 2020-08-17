@@ -9,7 +9,7 @@ function Main(props) {
 
   return (
     <div className="container">
-      <h1>Заметки Тестовое задание для Сбербанка</h1>
+      <h1 className="main-title">Заметки Тестовое задание для Сбербанка</h1>
       <button
         className="button"
         onClick={() => props.showModal('SHOW_CREATE_TODO')}
@@ -17,19 +17,7 @@ function Main(props) {
         Создать заметку
       </button>
       <h2>Список задач:</h2>
-      {newArray.length ? (
-        <TodoList todos={newArray.reverse()} />
-      ) : (
-        <div className="zeroTodo">
-          <h1>У вас нет еще ни одной заметки</h1>
-          <button
-            className="button"
-            onClick={() => props.showModal('SHOW_CREATE_TODO')}
-          >
-            Создать заметку
-          </button>
-        </div>
-      )}
+      <TodoList todos={newArray.reverse()} />
     </div>
   );
 }

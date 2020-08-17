@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import DeletePostModal from './DeletePostModal';
-import TodoCreate from '../TodoCreate';
+import TodoCreate from '../../TodoCreate';
 import ChangeTodoModal from './ChangeTodoModal';
 import { connect } from 'react-redux';
-import { hideModal } from '../store/actions/modal';
+import { hideModal } from '../../store/actions/modal';
 
 const Modal = props => {
   const modal = useRef(null);

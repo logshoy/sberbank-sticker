@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { createStore, compose, applyMiddleware } from 'redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import rootReducer from './store/reducers/rootReducer';
 import thunk from 'redux-thunk';
@@ -21,9 +21,9 @@ const store = createStore(
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter basename="/">
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 );
 

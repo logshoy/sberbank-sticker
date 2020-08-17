@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Main from './pages/Main';
 import EditPost from './pages/EditPost';
-import Modal from './components/Modal';
+import Modal from './components/Modal/Modal';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { localstorageGet } from './store/actions/todos';
