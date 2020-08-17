@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoList from '../TodoList';
+import TodoList from '../components/TodoItem/TodoList';
 import { connect } from 'react-redux';
 import { localstorageGet } from '../store/actions/todos';
 import { showModal } from '../store/actions/modal';
@@ -9,7 +9,7 @@ function Main(props) {
 
   return (
     <div className="container">
-      <h1 className="main-title">Заметки Тестовое задание для Сбербанка</h1>
+      <h1>Заметки Тестовое задание для Сбербанка</h1>
       <button
         className="button"
         onClick={() => props.showModal('SHOW_CREATE_TODO')}

@@ -1,10 +1,10 @@
 import React from 'react';
-import TodoCheckboxText from './components/TodoItem/TodoCheckboxText';
-import BinDelete from './svg/BinDelete';
+import TodoCheckboxText from './TodoCheckboxText';
+import BinDelete from '../../svg/BinDelete';
 import { connect } from 'react-redux';
-import { removeTodoItem, checkItem } from './store/actions/todos';
+import { removeTodoItem, checkItem } from '../../store/actions/todos';
 import { Link } from 'react-router-dom';
-import { showModal } from './store/actions/modal';
+import { showModal } from '../../store/actions/modal';
 
 function TodoItem(props) {
   return (
@@ -13,15 +13,16 @@ function TodoItem(props) {
         <div className="todoItem__title">{props.title}</div>
         <div className="todoItem__buttons">
           <Link className="todoItem__change" to={'/todo/' + props.id}></Link>
-          <BinDelete
-            size="20"
-            onClick={() =>
+          <div
+            onClick={() => {
               props.showModal('DELETE_POST', {
                 id: props.id,
                 deleteType: 'main',
-              })
-            }
-          />
+              });
+            }}
+          >
+            <BinDelete size="20" />
+          </div>
         </div>
       </div>
       {props.todosList.map((item, index) => {

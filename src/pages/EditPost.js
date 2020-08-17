@@ -122,31 +122,34 @@ class EditPost extends React.Component {
             +
           </button>
         </div>
-        <div className="buttons">
-          <button
-            className="button"
-            onClick={() => {
-              this.props.showModal('CHANGE_TODO', {
-                id: this.props.todoId.id,
-                title: this.state.todoTitle,
-                todosList: this.state.arr,
-              });
-            }}
-          >
-            Сохранить
-          </button>
-          <Link to="/">
-            <button className="button">Отмена</button>
-          </Link>
-          <BinDelete
-            size="50"
+        <div className="buttons buttons--editPost">
+          <div className="buttons--editPost">
+            <button
+              className="button"
+              onClick={() => {
+                this.props.showModal('CHANGE_TODO', {
+                  id: this.props.todoId.id,
+                  title: this.state.todoTitle,
+                  todosList: this.state.arr,
+                });
+              }}
+            >
+              Сохранить
+            </button>
+            <Link className="button" to="/">
+              Отмена
+            </Link>
+          </div>
+          <div
             onClick={() => {
               this.props.showModal('DELETE_POST', {
                 id: this.props.todoId.id,
                 deleteType: 'page',
               });
             }}
-          />
+          >
+            <BinDelete size="50" />
+          </div>
         </div>
       </div>
     );

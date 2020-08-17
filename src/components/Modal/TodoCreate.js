@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTodoItem } from './store/actions/todos';
-import { hideModal } from './store/actions/modal';
+import { addTodoItem } from '../../store/actions/todos';
+import { hideModal } from '../../store/actions/modal';
 
 function TodoCreate(props) {
   const [todosTitle, setTodosTitle] = useState(['']);
