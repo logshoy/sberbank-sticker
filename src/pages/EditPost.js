@@ -1,5 +1,5 @@
 import React from 'react';
-import ModalRoot from '../components/ModalRoot';
+import BinDelete from '../svg/BinDelete';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { todoById, changeById } from '../store/actions/todos';
@@ -77,9 +77,13 @@ class EditPost extends React.Component {
   render() {
     return (
       <div className="container">
-        <Link to="/">Вернуться</Link>
-        <h1>Изменить заметку</h1>
+        <div className="main-title">
+          <Link to="/">&larr;</Link>
+          <h1>Изменить заметку</h1>
+          <div></div>
+        </div>
         <input
+          type="text"
           value={this.state.todoTitle}
           onChange={e => this.handleChangeTitle(e)}
         />
@@ -104,28 +108,49 @@ class EditPost extends React.Component {
                 onChange={e => this.handleChange(e, index)}
                 value={todo.name}
               />
-              <button onClick={() => this.handleRemove(index)}>Remove</button>
+              <button
+                className="button--delete"
+                onClick={() => this.handleRemove(index)}
+              >
+                &times;
+              </button>
             </div>
           );
         })}
-        <button onClick={this.addTodoItem}>Add checkbox</button>
-        <div>
-          <button
+        <div className="button-add">
+          <button className="btn-circle" onClick={this.addTodoItem}>
+            +
+          </button>
+        </div>
+        <div className="buttons buttons--editPost">
+          <div className="buttons--editPost">
+            <button
+              className="button"
+              onClick={() => {
+                this.props.showModal('CHANGE_TODO', {
+                  id: this.props.todoId.id,
+                  title: this.state.todoTitle,
+                  todosList: this.state.arr,
+                });
+              }}
+            >
+              Сохранить
+            </button>
+            <Link className="button" to="/">
+              Отмена
+            </Link>
+          </div>
+          <div
             onClick={() => {
-              this.props.showModal('CHANGE_TODO', {
+              this.props.showModal('DELETE_POST', {
                 id: this.props.todoId.id,
-                title: this.state.todoTitle,
-                todosList: this.state.arr,
+                deleteType: 'page',
               });
             }}
           >
-            Сохранить
-          </button>
-          <Link to="/">
-            <button>Отмена</button>
-          </Link>
+            <BinDelete size="50" />
+          </div>
         </div>
-        <ModalRoot />
       </div>
     );
   }

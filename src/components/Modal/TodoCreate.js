@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTodoItem } from './store/actions/todos';
-import { hideModal } from './store/actions/modal';
+import { addTodoItem } from '../../store/actions/todos';
+import { hideModal } from '../../store/actions/modal';
 
 function TodoCreate(props) {
   const [todosTitle, setTodosTitle] = useState(['']);
@@ -57,7 +57,7 @@ function TodoCreate(props) {
       <div>
         <input
           type="text"
-          placeholder="Title"
+          placeholder="Название заметки"
           value={todosTitle}
           onChange={event => setTodosTitle(event.target.value)}
           onKeyPress={addTodo}
@@ -80,7 +80,7 @@ function TodoCreate(props) {
             </label>
             <input
               type="text"
-              placeholder="Task"
+              placeholder="Задание"
               onChange={e => handleChange(e, index)}
               value={todo.name}
             />
@@ -90,9 +90,11 @@ function TodoCreate(props) {
           </div>
         );
       })}
-      <button className="button" onClick={addCheckboxItem}>
-        Добавить чекбокс
-      </button>
+      <div className="button-add">
+        <button className="btn-circle" onClick={addCheckboxItem}>
+          +
+        </button>
+      </div>
       <div className="buttons">
         <button className="button" onClick={addTodoItem}>
           Сохранить

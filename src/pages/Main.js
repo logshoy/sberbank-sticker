@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoList from '../TodoList';
+import TodoList from '../components/TodoItem/TodoList';
 import { connect } from 'react-redux';
 import { localstorageGet } from '../store/actions/todos';
 import { showModal } from '../store/actions/modal';
@@ -17,19 +17,7 @@ function Main(props) {
         Создать заметку
       </button>
       <h2>Список задач:</h2>
-      {newArray.length ? (
-        <TodoList todos={newArray.reverse()} />
-      ) : (
-        <div className="zeroTodo">
-          <h1>У вас нет еще ни одной заметки</h1>
-          <button
-            className="button"
-            onClick={() => props.showModal('SHOW_CREATE_TODO')}
-          >
-            Создать заметку
-          </button>
-        </div>
-      )}
+      <TodoList todos={newArray.reverse()} />
     </div>
   );
 }

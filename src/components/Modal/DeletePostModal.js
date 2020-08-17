@@ -1,12 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeTodoItem } from '../store/actions/todos';
-import { hideModal } from '../store/actions/modal';
+import { removeTodoItem } from '../../store/actions/todos';
+import { hideModal } from '../../store/actions/modal';
+import { useHistory } from 'react-router-dom';
 
 function DeletePostModal(props) {
+  const history = useHistory();
   const removeTodo = () => {
-    props.removeTodoItem(props.modalProps);
+    props.removeTodoItem(props.modalProps.id);
     props.hideModal();
+    if (props.modalProps.deleteType === 'page') {
+      history.push('/');
+    }
   };
 
   return (

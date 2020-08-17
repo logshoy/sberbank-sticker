@@ -1,8 +1,10 @@
 import React from 'react';
+import TodoCheckboxText from './TodoCheckboxText';
+import BinDelete from '../../svg/BinDelete';
 import { connect } from 'react-redux';
-import { removeTodoItem, checkItem } from './store/actions/todos';
+import { removeTodoItem, checkItem } from '../../store/actions/todos';
 import { Link } from 'react-router-dom';
-import { showModal } from './store/actions/modal';
+import { showModal } from '../../store/actions/modal';
 
 function TodoItem(props) {
   return (
@@ -10,35 +12,30 @@ function TodoItem(props) {
       <div className="todoItem__todoHeader">
         <div className="todoItem__title">{props.title}</div>
         <div className="todoItem__buttons">
-          <Link className="todoItem__change" to={'/todo/' + props.id}>
-            Изменить
-          </Link>
+          <Link className="todoItem__change" to={'/todo/' + props.id}></Link>
           <div
-            className="todoItem__delete"
-            onClick={() => props.showModal('DELETE_POST', props.id)}
+            onClick={() => {
+              props.showModal('DELETE_POST', {
+                id: props.id,
+                deleteType: 'main',
+              });
+            }}
           >
-            Удалить
+            <BinDelete size="20" />
           </div>
         </div>
       </div>
-      <hr></hr>
       {props.todosList.map((item, index) => {
-        const cls = ['todoCheck'];
-        if (item.completed) {
-          cls.push('completed');
-        }
         return (
-          <div key={index} className={cls.join(' ')}>
-            <label>
-              <input
-                type="checkbox"
-                checked={item.completed}
-                onChange={() => props.checkItem(props.id, index)}
-              />
-              <div></div>
-            </label>
-            <span>{item.name}</span>
-          </div>
+          <>
+            <TodoCheckboxText
+              key={index}
+              id={props.id}
+              index={index}
+              completed={item.completed}
+              name={item.name}
+            />
+          </>
         );
       })}
     </li>

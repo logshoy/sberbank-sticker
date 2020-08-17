@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { changeById } from '../store/actions/todos';
-import { hideModal } from '../store/actions/modal';
+import { changeById } from '../../store/actions/todos';
+import { hideModal } from '../../store/actions/modal';
 
 function ChangeTodoModal(props) {
   const history = useHistory();
@@ -20,9 +20,14 @@ function ChangeTodoModal(props) {
   return (
     <div>
       <h2>Вы действительно хотите изменить эту заметку?</h2>
-      <div></div>
-      <button onClick={changeByIdModal}>Yes</button>
-      <button onClick={props.hideModal}>Nope</button>
+      <div className="buttons">
+        <button className="button" onClick={changeByIdModal}>
+          Да
+        </button>
+        <button className="button" onClick={props.hideModal}>
+          Нет
+        </button>
+      </div>
     </div>
   );
 }
