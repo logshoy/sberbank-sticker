@@ -51,14 +51,12 @@ ul {
   padding: 0;
 }
 
-.zeroTodo {
-  text-align: center;
-}
-
 .todoTitle {
   display: flex;
   align-items: center;
   height: 108px;
+  color: #64C4ED;
+  margin: 0 10px;
 }
 
 .todoTitle h2 {
@@ -214,6 +212,7 @@ input[type="text"] {
   margin: 29px 0;
   margin-right: 10px;
   font-weight: bold;
+  color: #64C4ED;
 }
 
 .buttons {

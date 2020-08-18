@@ -16,6 +16,7 @@ class EditPost extends React.Component {
   }
 
   componentDidMount() {
+    document.title = `Заметка ${this.props.match.params.id}`;
     setTimeout(() => {
       this.props.todoById(this.props.match.params.id);
       this.setState({
@@ -71,11 +72,16 @@ class EditPost extends React.Component {
     });
   };
 
-  onChangeTitle = titleChange => {
-    console.log(this.state.titleChange);
+  onChangeTitle = () => {
     this.setState({
-      titleChange: !titleChange,
+      titleChange: !this.state.titleChange,
     });
+  };
+
+  onChangeTitleKeyPress = event => {
+    if (event.key === 'Enter') {
+      this.onChangeTitle();
+    }
   };
 
   onChange = (change, index) => {
@@ -88,11 +94,7 @@ class EditPost extends React.Component {
 
   onChangePressEnter = (event, change, index) => {
     if (event.key === 'Enter') {
-      const newState = this.state.arr;
-      newState[index].change = !change;
-      this.setState({
-        arr: newState,
-      });
+      this.onChange(change, index);
     }
   };
 
@@ -115,17 +117,18 @@ class EditPost extends React.Component {
         </div>
         <div className="todoTitle">
           {!this.state.titleChange ? (
-            <h2>{this.state.todoTitle}</h2>
+            <h2 onClick={() => this.onChangeTitle()}>{this.state.todoTitle}</h2>
           ) : (
             <input
               type="text"
               value={this.state.todoTitle}
+              onKeyPress={e => this.onChangeTitleKeyPress(e)}
               onChange={e => this.handleChangeTitle(e)}
             />
           )}
           <div
             className="todoItem__change"
-            onClick={() => this.onChangeTitle(this.state.titleChange)}
+            onClick={() => this.onChangeTitle()}
           ></div>
         </div>
         {this.state.arr.map((todo, index) => {
@@ -154,7 +157,9 @@ class EditPost extends React.Component {
                   value={todo.name}
                 />
               ) : (
-                <span>{todo.name}</span>
+                <span onClick={() => this.onChange(todo.change, index)}>
+                  {todo.name}
+                </span>
               )}
               <div
                 className="todoItem__change"

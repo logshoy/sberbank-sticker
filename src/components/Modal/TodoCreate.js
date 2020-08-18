@@ -13,10 +13,14 @@ function TodoCreate(props) {
   ]);
 
   const addTodo = event => {
-    if (event.key === 'Enter') {
-      props.addTodoItem(todosTitle, todo);
-      props.hideModal();
+    if (event.key === 'Enter' && todosTitle !== '') {
+      addTodoItem();
     }
+  };
+
+  const addTodoItem = () => {
+    props.addTodoItem(todosTitle, todo);
+    props.hideModal();
   };
 
   const addCheckboxItem = () => {
@@ -44,11 +48,6 @@ function TodoCreate(props) {
       todo.splice(i, 1);
       addTodos([...todo]);
     }
-  };
-
-  const addTodoItem = () => {
-    props.addTodoItem(todosTitle, todo);
-    props.hideModal();
   };
 
   return (

@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-
 import { SHOW_MODAL, HIDE_MODAL } from '../actions/actionTypes';
 
 const initialState = {
