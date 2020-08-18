@@ -14,7 +14,7 @@ function App(props) {
       );
       props.localstorageGet(todos);
     }
-  }, [props]);
+  }, []);
 
   return (
     <>
