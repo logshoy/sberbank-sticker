@@ -1,11 +1,11 @@
-Инструкция для локального разветывания:
+Инструкция для локального развертывания:
 
 1) Скачать код из репозитория
 
 2) С помощью npm или yarn установить модули командой:
 
-npm install или yarn install
+   npm install или yarn install
 
 3) Запустить проект с помощью:
 
-npm run start или yarn start
+   npm run start или yarn start
