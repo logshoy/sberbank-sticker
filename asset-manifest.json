@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/sberbank-sticker/static/css/main.61295197.chunk.css",
-    "main.js": "/sberbank-sticker/static/js/main.0f28d5df.chunk.js",
-    "main.js.map": "/sberbank-sticker/static/js/main.0f28d5df.chunk.js.map",
+    "main.js": "/sberbank-sticker/static/js/main.5a9306fd.chunk.js",
+    "main.js.map": "/sberbank-sticker/static/js/main.5a9306fd.chunk.js.map",
     "runtime-main.js": "/sberbank-sticker/static/js/runtime-main.e26ce6a9.js",
     "runtime-main.js.map": "/sberbank-sticker/static/js/runtime-main.e26ce6a9.js.map",
     "static/js/2.7c2a4e12.chunk.js": "/sberbank-sticker/static/js/2.7c2a4e12.chunk.js",
     "static/js/2.7c2a4e12.chunk.js.map": "/sberbank-sticker/static/js/2.7c2a4e12.chunk.js.map",
     "index.html": "/sberbank-sticker/index.html",
-    "precache-manifest.c235ca6ad3e2a8aa16204f2f11b94c91.js": "/sberbank-sticker/precache-manifest.c235ca6ad3e2a8aa16204f2f11b94c91.js",
+    "precache-manifest.f2764e80c23e950c22356a1cda254c05.js": "/sberbank-sticker/precache-manifest.f2764e80c23e950c22356a1cda254c05.js",
     "service-worker.js": "/sberbank-sticker/service-worker.js",
     "static/css/main.61295197.chunk.css.map": "/sberbank-sticker/static/css/main.61295197.chunk.css.map",
     "static/js/2.7c2a4e12.chunk.js.LICENSE.txt": "/sberbank-sticker/static/js/2.7c2a4e12.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.e26ce6a9.js",
     "static/js/2.7c2a4e12.chunk.js",
     "static/css/main.61295197.chunk.css",
-    "static/js/main.0f28d5df.chunk.js"
+    "static/js/main.5a9306fd.chunk.js"
   ]
 }

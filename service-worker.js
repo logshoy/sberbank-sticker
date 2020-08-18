@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/sberbank-sticker/precache-manifest.c235ca6ad3e2a8aa16204f2f11b94c91.js"
+  "/sberbank-sticker/precache-manifest.f2764e80c23e950c22356a1cda254c05.js"
 );
 
 self.addEventListener('message', (event) => {
