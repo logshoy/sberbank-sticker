@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { checkItem } from '../../store/actions/todos';
 
 function TodoCheckboxText(props) {
   const cls = ['todoCheck'];
@@ -11,22 +9,12 @@ function TodoCheckboxText(props) {
   return (
     <div className={cls.join(' ')}>
       <label>
-        <input
-          type="checkbox"
-          checked={props.completed}
-          onChange={() => props.checkItem(props.id, props.index)}
-        />
-        <div></div>
+        <input type="checkbox" checked={props.completed} disabled />
+        <div className="todoCheck__text"></div>
       </label>
       <span>{props.name}</span>
     </div>
   );
 }
 
-function mapDispathToProps(dispatch) {
-  return {
-    checkItem: (todoId, todoIndex) => dispatch(checkItem(todoId, todoIndex)),
-  };
-}
-
-export default connect(null, mapDispathToProps)(TodoCheckboxText);
+export default TodoCheckboxText;

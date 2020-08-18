@@ -27,11 +27,16 @@ const Modal = props => {
 
   const handleOutsideClick = useCallback(
     e => {
-      if (modal) {
-        if (!modal.current.contains(e.target)) {
-          props.hideModal();
-          document.removeEventListener('click', handleOutsideClick, false);
-        }
+      if (
+        modal &&
+        !modal.current.contains(e.target) &&
+        e.target.dataset.backgorund === 'true'
+      ) {
+        console.log('это я руиню', e.target.dataset);
+        document.removeEventListener('click', handleOutsideClick, false);
+        props.hideModal();
+      } else {
+        console.log('а я нет руиню', modal);
       }
     },
     [props],
@@ -58,7 +63,7 @@ const Modal = props => {
   };
 
   return (
-    <div className="modalBackground">
+    <div className="modalBackground" data-backgorund="true">
       <div className="modal-content" ref={modal}>
         <button
           type="button"
