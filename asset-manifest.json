@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/sberbank-sticker/static/css/main.94719052.chunk.css",
-    "main.js": "/sberbank-sticker/static/js/main.ada932fb.chunk.js",
-    "main.js.map": "/sberbank-sticker/static/js/main.ada932fb.chunk.js.map",
+    "main.css": "/sberbank-sticker/static/css/main.61295197.chunk.css",
+    "main.js": "/sberbank-sticker/static/js/main.0f28d5df.chunk.js",
+    "main.js.map": "/sberbank-sticker/static/js/main.0f28d5df.chunk.js.map",
     "runtime-main.js": "/sberbank-sticker/static/js/runtime-main.e26ce6a9.js",
     "runtime-main.js.map": "/sberbank-sticker/static/js/runtime-main.e26ce6a9.js.map",
-    "static/js/2.14283831.chunk.js": "/sberbank-sticker/static/js/2.14283831.chunk.js",
-    "static/js/2.14283831.chunk.js.map": "/sberbank-sticker/static/js/2.14283831.chunk.js.map",
+    "static/js/2.7c2a4e12.chunk.js": "/sberbank-sticker/static/js/2.7c2a4e12.chunk.js",
+    "static/js/2.7c2a4e12.chunk.js.map": "/sberbank-sticker/static/js/2.7c2a4e12.chunk.js.map",
     "index.html": "/sberbank-sticker/index.html",
-    "precache-manifest.ed2c0d90a2155e2fd756f2ea19082230.js": "/sberbank-sticker/precache-manifest.ed2c0d90a2155e2fd756f2ea19082230.js",
+    "precache-manifest.c235ca6ad3e2a8aa16204f2f11b94c91.js": "/sberbank-sticker/precache-manifest.c235ca6ad3e2a8aa16204f2f11b94c91.js",
     "service-worker.js": "/sberbank-sticker/service-worker.js",
-    "static/css/main.94719052.chunk.css.map": "/sberbank-sticker/static/css/main.94719052.chunk.css.map",
-    "static/js/2.14283831.chunk.js.LICENSE.txt": "/sberbank-sticker/static/js/2.14283831.chunk.js.LICENSE.txt"
+    "static/css/main.61295197.chunk.css.map": "/sberbank-sticker/static/css/main.61295197.chunk.css.map",
+    "static/js/2.7c2a4e12.chunk.js.LICENSE.txt": "/sberbank-sticker/static/js/2.7c2a4e12.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e26ce6a9.js",
-    "static/js/2.14283831.chunk.js",
-    "static/css/main.94719052.chunk.css",
-    "static/js/main.ada932fb.chunk.js"
+    "static/js/2.7c2a4e12.chunk.js",
+    "static/css/main.61295197.chunk.css",
+    "static/js/main.0f28d5df.chunk.js"
   ]
 }
