@@ -14,8 +14,7 @@ function App(props) {
       );
       props.localstorageGet(todos);
     }
-    // eslint-disable-next-line
-  }, []); 
+  }, []);
 
   return (
     <>

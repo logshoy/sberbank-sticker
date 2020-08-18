@@ -26,7 +26,6 @@ function mapStateToProps(state) {
   return {
     todosArray: state.todos.todosArray,
     todoTitle: state.todos.todoTitle,
-    modalData: state.modal,
   };
 }
 

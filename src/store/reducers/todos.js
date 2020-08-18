@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import {
   ADD_TODO_ITEM,
   REMOVE_TODO_ITEM,

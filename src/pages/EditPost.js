@@ -11,15 +11,21 @@ class EditPost extends React.Component {
     this.state = {
       todoTitle: '',
       arr: [],
+      titleChange: false,
     };
   }
 
   componentDidMount() {
+    document.title = `Заметка ${this.props.match.params.id}`;
     setTimeout(() => {
       this.props.todoById(this.props.match.params.id);
       this.setState({
         todoTitle: this.props.todoId.title,
         arr: this.props.todoId.todosList,
+      });
+      this.state.arr.forEach(item => (item.change = false));
+      this.setState({
+        arr: this.state.arr,
       });
     });
   }
@@ -37,6 +43,7 @@ class EditPost extends React.Component {
         {
           name: '',
           completed: false,
+          change: true,
         },
       ],
     });
@@ -65,6 +72,32 @@ class EditPost extends React.Component {
     });
   };
 
+  onChangeTitle = () => {
+    this.setState({
+      titleChange: !this.state.titleChange,
+    });
+  };
+
+  onChangeTitleKeyPress = event => {
+    if (event.key === 'Enter') {
+      this.onChangeTitle();
+    }
+  };
+
+  onChange = (change, index) => {
+    const newState = this.state.arr;
+    newState[index].change = !change;
+    this.setState({
+      arr: newState,
+    });
+  };
+
+  onChangePressEnter = (event, change, index) => {
+    if (event.key === 'Enter') {
+      this.onChange(change, index);
+    }
+  };
+
   handleSave() {
     this.props.changeById(
       this.props.todoId.id,
@@ -82,11 +115,22 @@ class EditPost extends React.Component {
           <h1>Изменить заметку</h1>
           <div></div>
         </div>
-        <input
-          type="text"
-          value={this.state.todoTitle}
-          onChange={e => this.handleChangeTitle(e)}
-        />
+        <div className="todoTitle">
+          {!this.state.titleChange ? (
+            <h2 onClick={() => this.onChangeTitle()}>{this.state.todoTitle}</h2>
+          ) : (
+            <input
+              type="text"
+              value={this.state.todoTitle}
+              onKeyPress={e => this.onChangeTitleKeyPress(e)}
+              onChange={e => this.handleChangeTitle(e)}
+            />
+          )}
+          <div
+            className="todoItem__change"
+            onClick={() => this.onChangeTitle()}
+          ></div>
+        </div>
         {this.state.arr.map((todo, index) => {
           const cls = ['todoCheck'];
           if (todo.completed) {
@@ -100,14 +144,27 @@ class EditPost extends React.Component {
                   checked={todo.completed}
                   onChange={() => this.checkItem(todo.completed, index)}
                 />
-                <div></div>
+                <div className="todoCheck__text"></div>
               </label>
-              <input
-                type="text"
-                placeholder="Task"
-                onChange={e => this.handleChange(e, index)}
-                value={todo.name}
-              />
+              {todo.change ? (
+                <input
+                  type="text"
+                  placeholder="Task"
+                  onChange={e => this.handleChange(e, index)}
+                  onKeyPress={e =>
+                    this.onChangePressEnter(e, todo.change, index)
+                  }
+                  value={todo.name}
+                />
+              ) : (
+                <span onClick={() => this.onChange(todo.change, index)}>
+                  {todo.name}
+                </span>
+              )}
+              <div
+                className="todoItem__change"
+                onClick={() => this.onChange(todo.change, index)}
+              ></div>
               <button
                 className="button--delete"
                 onClick={() => this.handleRemove(index)}
@@ -123,7 +180,7 @@ class EditPost extends React.Component {
           </button>
         </div>
         <div className="buttons buttons--editPost">
-          <div className="buttons--editPost">
+          <div className="buttons">
             <button
               className="button"
               onClick={() => {
@@ -133,6 +190,7 @@ class EditPost extends React.Component {
                   todosList: this.state.arr,
                 });
               }}
+              disabled={!this.state.todoTitle}
             >
               Сохранить
             </button>

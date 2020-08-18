@@ -27,15 +27,9 @@ function TodoItem(props) {
       </div>
       {props.todosList.map((item, index) => {
         return (
-          <>
-            <TodoCheckboxText
-              key={index}
-              id={props.id}
-              index={index}
-              completed={item.completed}
-              name={item.name}
-            />
-          </>
+          <div key={index}>
+            <TodoCheckboxText completed={item.completed} name={item.name} />
+          </div>
         );
       })}
     </li>
